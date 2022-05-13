@@ -8,13 +8,11 @@
         <div class="popular-games grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 gap-12 text-sm border-b border-gray-800 pb-16">
             <div class="game mt-8">
                 <div class="relative inline-block">
-                    <a href="#">
+                    <a href="show">
                         <img src="/ff7.jpg" alt="game cover" class="hover:opacity-75 transition ease-in-out duration-150">
                     </a>
                     <div class="absolute bottom-16 -right-5 w-16 h-16 bg-gray-800 rounded-full">
-                        <div class="flex justify-center font-semibold text-xs items-center h-full">
-                            80%
-                        </div>
+                        <div class="flex justify-center font-semibold text-xs items-center h-full">80%</div>
                     </div>
                     <a href="#" class="block text-base font-semibold leading-tight hover:text-gray-400 mt-8">
                         Final Fantasy VII Remake
