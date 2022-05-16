@@ -480,6 +480,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
 }
+.mr-0 {
+  margin-right: 0px;
+}
+.mt-12 {
+  margin-top: 3rem;
+}
+.ml-0 {
+  margin-left: 0px;
+}
 .mt-1 {
   margin-top: 0.25rem;
 }
