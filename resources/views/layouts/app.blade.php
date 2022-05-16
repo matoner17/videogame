@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @livewireStyles
     <title>Video Game Aggregator</title>
 </head>
 <body class="bg-gray-900 text-white">
@@ -49,5 +50,6 @@
             Powered by <a href="#" class="underline hover:text-gray-400">IGDB API</a>
         </div>
     </footer>
+    @livewireScripts
 </body>
 </html>
