@@ -5,7 +5,24 @@ module.exports = {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        '44': '11rem',
+      }
+    },
+    spinner: (theme) => ({
+      default: {
+        color: '#dae1e7',
+        size: '2em',
+        border: '2px',
+        speed: '500ms',
+      }
+    }),
   },
-  plugins: [],
+  variants: {
+    spinner: ['responsive']
+  },
+  plugins: [
+    require('tailwindcss-spinner')(),
+  ],
 }
