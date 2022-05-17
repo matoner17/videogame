@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Carbon\Carbon;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 
@@ -16,7 +17,7 @@ class RecentlyReviewed extends Component
         $before = Carbon::now()->subMonths(36)->timestamp;
         $current = Carbon::now()->timestamp;
 
-        $this->recentlyReviewed = Cache::remember('recently-reviewed', 60000, function () use ($before, $current) {
+        $recentlyReviewedUnformatted = Cache::remember('recently-reviewed', 60000, function () use ($before, $current) {
             return Http::withHeaders(config('services.igdb')
                     )->withBody("
                         fields name, cover.url, first_release_date, platforms.abbreviation, summary, slug, rating, aggregated_rating, rating_count;
@@ -32,6 +33,21 @@ class RecentlyReviewed extends Component
                         'https://api.igdb.com/v4/games/'
                     )->json();
         });
+
+        $this->recentlyReviewed = $this->formatForView($recentlyReviewedUnformatted);
+    }
+
+    private function formatForView($games)
+    {
+        return collect($games)->map(function ($game) {
+            return collect($game)->merge([
+                'coverImageUrl' => Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']),
+                'aggregated_rating' => isset($game['aggregated_rating']) ? round($game['aggregated_rating']).'%' : null,
+                'rating' => isset($game['rating']) ? round($game['rating']).'%' : null,
+                'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', '),
+                'slug' => isset($game['slug']) ? $game['slug'] : str_replace(':', '', str_replace(' ', '-', str_replace('&', 'and', strtolower($game['name'])))),
+            ]);
+        })->toArray();
     }
     
     public function render()
