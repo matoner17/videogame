@@ -126,7 +126,7 @@ class GamesController extends Controller
                     ? $item['involved_companies'][0]['company']['name'] 
                     : null,
                 'trailer' => array_key_exists('videos', $item) 
-                    ? 'https://youtube.com/watch/'.$item['videos'][0]['video_id'] 
+                    ? 'https://youtube.com/embed/'.$item['videos'][0]['video_id'] 
                     : null,
                 'slug' => array_key_exists('slug', $item) 
                     ? $item['slug'] 

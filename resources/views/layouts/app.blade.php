@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @livewireStyles
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>Video Game Aggregator</title>
 </head>
 <body class="bg-gray-900 text-white">
@@ -22,16 +23,7 @@
                 </a>
             </div>
             <div class="flex items-center mt-6 lg:mt-0">
-                <div class="relative">
-                    <input
-                        type="text"
-                        class="bg-gray-800 text-sm rounded-full w-64 px-3 pl-8 py-1 focus:outline-none focus:shadow-outline"
-                        placeholder="Search..."
-                    >
-                    <div class="flex items-center h-full ml-2 absolute top-0">
-                        a
-                    </div>
-                </div>
+                <livewire:search-dropdown>
                 <div class="ml-6">
                     <a href="#">
                         <img src="/avatar.jpg" alt="avatar" class="rounded-full w-8">
