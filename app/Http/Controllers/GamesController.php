@@ -111,10 +111,10 @@ class GamesController extends Controller
                     ? Str::replaceFirst('thumb', 'cover_big', $item['cover']['url'])
                     : 'https://via.placeholder.com/264x352',
                 'aggregated_rating' => array_key_exists('aggregated_rating', $item)
-                    ? round($item['aggregated_rating']).'%'
+                    ? round($item['aggregated_rating'])
                     : null,
                 'rating' => array_key_exists('rating', $item) 
-                    ? round($item['rating']).'%'
+                    ? round($item['rating'])
                     : null,
                 'genres' => array_key_exists('genres', $item)
                     ? collect($item['genres'])->pluck('name')->implode(', ')
@@ -145,10 +145,10 @@ class GamesController extends Controller
                             ? Str::replaceFirst('thumb', 'cover_big', $game['cover']['url'])
                             : 'https://via.placeholder.com/264x352',
                         'aggregated_rating' => array_key_exists('aggregated_rating', $game) 
-                            ? round($game['aggregated_rating']).'%' 
+                            ? round($game['aggregated_rating'])
                             : null,
                         'rating' => array_key_exists('rating', $game) 
-                            ? round($game['rating']).'%' 
+                            ? round($game['rating'])
                             : null,
                         'platforms' => array_key_exists('platforms', $game) 
                             ? collect($game['platforms'])->pluck('abbreviation')->implode(', ')

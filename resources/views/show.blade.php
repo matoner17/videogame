@@ -21,16 +21,28 @@
                 <div class="flex flex-wrap items-center mt-8">
                     @if ($game['aggregated_rating'])
                     <div class="flex items-center">
-                        <div class="w-16 h-16 bg-gray-800 rounded-full">
-                            <div class="flex justify-center items-center font-semibold text-xs h-full">{{ $game['aggregated_rating'] }}</div>
+                        <div id="aggregatedRating" class="w-16 h-16 bg-gray-800 rounded-full relative">
+                            @push('scripts')
+                                @include('_rating', [
+                                    'slug' => 'aggregatedRating',
+                                    'rating' => $game['aggregated_rating'],
+                                    'event' => null,
+                                ])
+                            @endpush
                         </div>
                         <div class="ml-4 text-xs">Aggregated <br>Rating</div>
                     </div>                       
                     @endif
                     @if ($game['rating'])
                     <div class="flex items-center ml-12">
-                        <div class="w-16 h-16 bg-gray-800 rounded-full">
-                            <div class="flex justify-center items-center font-semibold text-xs h-full">{{ $game['rating'] }}</div>
+                        <div id="igdbRating" class="w-16 h-16 bg-gray-800 rounded-full relative">
+                            @push('scripts')
+                                @include('_rating', [
+                                    'slug' => 'igdbRating',
+                                    'rating' => $game['rating'],
+                                    'event' => null,
+                                ])
+                            @endpush
                         </div>
                         <div class="ml-4 text-xs">IGDB <br> Rating</div>
                     </div>

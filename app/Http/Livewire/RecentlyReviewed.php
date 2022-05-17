@@ -35,6 +35,15 @@ class RecentlyReviewed extends Component
         });
 
         $this->recentlyReviewed = $this->formatForView($recentlyReviewedUnformatted);
+
+        collect($this->recentlyReviewed)->filter(function ($game) {
+            return $game['aggregated_rating'];
+        })->each(function ($game) {
+            $this->emit('reviewGameRating', [
+                'slug' => 'review_'.$game['slug'],
+                'rating' => $game['aggregated_rating'] / 100
+            ]);
+        });
     }
 
     private function formatForView($games)
@@ -42,8 +51,8 @@ class RecentlyReviewed extends Component
         return collect($games)->map(function ($game) {
             return collect($game)->merge([
                 'coverImageUrl' => Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']),
-                'aggregated_rating' => isset($game['aggregated_rating']) ? round($game['aggregated_rating']).'%' : null,
-                'rating' => isset($game['rating']) ? round($game['rating']).'%' : null,
+                'aggregated_rating' => isset($game['aggregated_rating']) ? round($game['aggregated_rating']) : null,
+                'rating' => isset($game['rating']) ? round($game['rating']) : null,
                 'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', '),
                 'slug' => isset($game['slug']) ? $game['slug'] : str_replace(':', '', str_replace(' ', '-', str_replace('&', 'and', strtolower($game['name'])))),
             ]);
