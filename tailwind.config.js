@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       spacing: {
         '44': '11rem',
+        '88': '22rem',
       }
     },
     spinner: (theme) => ({

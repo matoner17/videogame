@@ -20,7 +20,7 @@ class MostAnticipated extends Component
         $mostAnticipatedUnformatted = Cache::remember('most-anticipated', 60000, function () use ($current, $afterTwelveMonths) {
             return Http::withHeaders(config('services.igdb')
                     )->withBody("
-                        fields name, cover.url, first_release_date, platforms.abbreviation, slug;
+                        fields name, cover.url, first_release_date, platforms.abbreviation;
                         where
                         platforms = (48,49,130,6)
                         & (first_release_date >= {$current} & first_release_date < {$afterTwelveMonths});
@@ -41,7 +41,6 @@ class MostAnticipated extends Component
             return collect($game)->merge([
                 'coverImageUrl' => Str::replaceFirst('thumb', 'cover_small', $game['cover']['url']),
                 'releaseDate' => Carbon::parse($game['first_release_date'])->format('M d, Y'),
-                'slug' => isset($game['slug']) ? $game['slug'] : str_replace(':', '', str_replace(' ', '-', str_replace('&', 'and', strtolower($game['name'])))),
             ]);
         })->toArray();
     }

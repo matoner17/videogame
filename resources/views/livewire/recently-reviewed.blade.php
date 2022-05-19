@@ -3,15 +3,15 @@
     class="recently-reviewed-container space-y-12 mt-8"
 >
     @forelse ($recentlyReviewed as $game)
-    <div class="game flex bg-gray-800 rounded-lg shadow-md p-6">
-        <div class="relative flex-none">
-            <a href="{{ route('games.show', $game['slug']) }}">
-                <img src="{{ $game['coverImageUrl'] }}" alt="game cover" class="w-48 hover:opacity-75 transition ease-in-out duration-150">
+    <div class="game grid grid-rows-2 grid-flow-col sm:grid-rows-1 sm:grid-cols-2 sm:grid-flow-row bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="relative flex-none h-88">
+            <a href="{{ route('games.show', $game['id']) }}">
+                <img src="{{ $game['coverImageUrl'] }}" alt="game cover" class="hover:opacity-75 transition ease-in-out duration-150">
             </a>
-            <div id="review_{{ $game['slug'] }}" class="absolute bottom-16 -right-5 w-16 h-16 bg-gray-900 rounded-full"></div>
+            <div id="review_{{ $game['id'] }}" class="absolute -bottom-4 -right-4 lg:right-0 xl:right-28 w-16 h-16 bg-gray-900 rounded-full"></div>
         </div>
-        <div class="ml-6 lg:ml-12">
-            <a href="{{ route('games.show', $game['slug']) }}" class="block text-lg font-semibold leading-tight hover:text-gray-400 mt-4">
+        <div class="ml-6 lg:ml-0 xl:-ml-20">
+            <a href="{{ route('games.show', $game['id']) }}" class="block text-lg font-semibold leading-tight hover:text-gray-400 mt-4">
                 {{ $game['name'] }}
             </a>
             <div class="text-gray-400 mt-1">

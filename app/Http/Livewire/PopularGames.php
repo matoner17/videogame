@@ -20,13 +20,12 @@ class PopularGames extends Component
         $popularGamesUnformatted = Cache::remember('popular-games-new', 60000, function () use ($before, $after) {
             return Http::withHeaders(config('services.igdb')
                     )->withBody("
-                        fields name, cover.url, first_release_date, platforms.abbreviation, slug, rating, aggregated_rating;
+                        fields name, cover.url, first_release_date, platforms.abbreviation, rating, aggregated_rating, total_rating_count;
                         where
-                        slug != null
-                        & aggregated_rating > 0
+                        aggregated_rating > 0
                         & platforms = (48,49,130,6)
                         & (first_release_date >= {$before} & first_release_date < {$after});
-                        sort aggregated_rating desc;
+                        sort total_rating_count desc;
                         limit 12;",
                         'text/plain'
                     )->post(
@@ -40,7 +39,7 @@ class PopularGames extends Component
             return $game['aggregated_rating'];
         })->each(function ($game) {
             $this->emit('gameRating', [
-                'slug' => $game['slug'],
+                'slug' => 'game_'.$game['id'],
                 'rating' => $game['aggregated_rating'] / 100
             ]);
         });

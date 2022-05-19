@@ -36,7 +36,7 @@
             @foreach ($searchResults as $result)
             <li class="border-b border-gray-700">
                 <a
-                    href="{{ route('games.show', $result['slug']) }}"
+                    href="{{ route('games.show', $result['gameId']) }}"
                     @if ($loop->last) x-on:keydown.tab="isVisible = false" @endif
                     class="flex items-center hover:bg-gray-700 transition ease-in-out duration-150 p-3"
                 >

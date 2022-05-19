@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('pageTitle', $game['name'])
+
 @section('content')
     <div class="container mx-auto px-4">
         <div class="game-details flex flex-col lg:flex-row border-b border-gray-800 pb-12">
@@ -174,6 +176,7 @@
         </div> <!-- end images container -->
         @endif
 
+        @if (isset($game['similarGames']))
         <div class="similar-games-container mt-8">
             <h2 class="text-blue-500 uppercase tracking-wide font-semibold">
                 Similar Games
@@ -184,5 +187,6 @@
                 @endforeach
             </div>
         </div> <!-- end similar games container -->
+        @endif
     </div>
 @endsection

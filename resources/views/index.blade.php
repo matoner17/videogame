@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('pageTitle', 'Video Game Aggregator')
+
 @section('content')
     <div class="container mx-auto px-4">
         <h2 class="text-blue-500 uppercase tracking-wide font-semibold">

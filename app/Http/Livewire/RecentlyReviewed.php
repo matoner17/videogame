@@ -20,7 +20,7 @@ class RecentlyReviewed extends Component
         $recentlyReviewedUnformatted = Cache::remember('recently-reviewed', 60000, function () use ($before, $current) {
             return Http::withHeaders(config('services.igdb')
                     )->withBody("
-                        fields name, cover.url, first_release_date, platforms.abbreviation, summary, slug, rating, aggregated_rating, rating_count;
+                        fields name, cover.url, first_release_date, platforms.abbreviation, summary, rating, aggregated_rating, rating_count;
                         where
                         rating_count > 5
                         & aggregated_rating > 0
@@ -40,7 +40,7 @@ class RecentlyReviewed extends Component
             return $game['aggregated_rating'];
         })->each(function ($game) {
             $this->emit('reviewGameRating', [
-                'slug' => 'review_'.$game['slug'],
+                'slug' => 'review_'.$game['id'],
                 'rating' => $game['aggregated_rating'] / 100
             ]);
         });
@@ -54,7 +54,6 @@ class RecentlyReviewed extends Component
                 'aggregated_rating' => isset($game['aggregated_rating']) ? round($game['aggregated_rating']) : null,
                 'rating' => isset($game['rating']) ? round($game['rating']) : null,
                 'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', '),
-                'slug' => isset($game['slug']) ? $game['slug'] : str_replace(':', '', str_replace(' ', '-', str_replace('&', 'and', strtolower($game['name'])))),
             ]);
         })->toArray();
     }

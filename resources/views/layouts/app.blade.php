@@ -7,18 +7,18 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @livewireStyles
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <title>Video Game Aggregator</title>
+    <title>@yield('pageTitle')</title>
 </head>
 <body class="bg-gray-900 text-white">
     <header class="border-b border-gray-800">
         <nav class="flex flex-col lg:flex-row items-center justify-between container px-4 py-6 mx-auto">
             <div class="flex flex-col lg:flex-row items-center">
                 <a href="/">
-                    <img src="/laracasts-logo.svg" alt="Laracasts Logo" class="flex-none w-32">
+                    <img src="/laracasts-logo.svg" alt="Logo" class="flex-none w-32">
                     <ul class="flex ml-0 mt-6 lg:ml-16 md:mt-0 space-x-8">
-                        <li><a href="#" class="hover:text-gray-400">Games</a></li>
+                        {{-- <li><a href="#" class="hover:text-gray-400">Games</a></li>
                         <li><a href="#" class="hover:text-gray-400">Reviews</a></li>
-                        <li><a href="#" class="hover:text-gray-400">Coming Soon</a></li>
+                        <li><a href="#" class="hover:text-gray-400">Coming Soon</a></li> --}}
                     </ul>
                 </a>
             </div>

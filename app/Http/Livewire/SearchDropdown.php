@@ -17,7 +17,7 @@ class SearchDropdown extends Component
             $searchResultsUnformatted = Http::withHeaders(config('services.igdb')
                         )->withBody("
                             search \"$this->search\";
-                            fields name, game.slug, game.cover.url;
+                            fields name, game.id, game.cover.url;
                             limit 6;",
                             'text/plain'
                         )->post(
@@ -27,7 +27,7 @@ class SearchDropdown extends Component
             $this->searchResults = $this->formatForView($searchResultsUnformatted);
         }
 
-        // dump($this->searchResults);
+        //dump($this->searchResults);
 
         return view('livewire.search-dropdown');
     }
@@ -39,9 +39,9 @@ class SearchDropdown extends Component
                 'coverImageUrl' => isset($game['game']['cover']) 
                     ? Str::replaceFirst('thumb', 'cover_small', $game['game']['cover']['url']) 
                     : 'https://via.placeholder.com/40x53',
-                'slug' => isset($game['slug']) 
-                    ? $game['slug'] 
-                    : str_replace(':', '', str_replace(' ', '-', str_replace('&', 'and', strtolower($game['name'])))),
+                'gameId' => array_key_exists('game', $game)
+                    ? $game['game']['id']
+                    : '#',
             ]);
         })->toArray();
     }
